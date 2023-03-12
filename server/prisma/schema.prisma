@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Hacker {
+  id                        String            @id @default(cuid())
+  email                     String            @unique
+  firstName                 String
+  lastName                  String
+  website                   String?
+  github                    String?
+  linkedIn                  String?
+  yearsOfSoftwareExperience Int               @default(0)
+  ethExperienceLevel        ETHExperience     @default(BEGINNER)
+  Motivation                hackerMotivation
+  priorBuilds               String            @db.VarChar(500)
+  lookingToBuild            String            @db.VarChar(500)
+  rulesAccepted             Boolean
+  applicationStatus         applicationStatus @default(PENDING)
+}
+
+model Partner {
+  id                String            @id @default(cuid())
+  email             String            @unique
+  firstName         String
+  lastName          String
+  website           String?
+  linkedIn          String?
+  telegram          String?
+  twitter           String?
+  otherEvents       String            @db.VarChar(500)
+  rulesAccepted     Boolean
+  applicationStatus applicationStatus @default(PENDING)
+}
+
+model Mentor {
+  id                        String            @id @default(cuid())
+  email                     String            @unique
+  firstName                 String
+  lastName                  String
+  website                   String?
+  github                    String?
+  linkedIn                  String?
+  telegram                  String?
+  twitter                   String?
+  yearsOfSoftwareExperience Int               @default(0)
+  ethExperienceLevel        ETHExperience     @default(BEGINNER)
+  priorMentor               String            @db.VarChar(500)
+  motivation                String            @db.VarChar(500)
+  rulesAccepted             Boolean
+  applicationStatus         applicationStatus @default(PENDING)
+}
+
+enum ETHExperience {
+  BEGINNER
+  INTERMEDIATE
+  EXPERT
+}
+
+enum hackerMotivation {
+  ATTENDWORKSHOPS
+  RESUMEBUILD
+  GETBETTER
+  MEETCOMPANIES
+  MEETPEOPLE
+  LAUNCHPRODUCT
+  WINPRIZE
+  OTHER
+}
+
+enum applicationStatus {
+  PENDING
+  REJECTED
+  ACCEPTED
+}

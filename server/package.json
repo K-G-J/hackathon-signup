@@ -1,0 +1,26 @@
+{
+  "name": "code-challenge-kate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ethglobal/code-challenge-kate.git",
+  "author": "Kate Johnson <johnson.kat.g@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@prisma/client": "^4.11.0",
+    "@types/node": "^18.15.0",
+    "apollo-server-express": "^3.12.0",
+    "express": "^4.18.2",
+    "express-graphql": "^0.12.0",
+    "graphql": "^16.6.0",
+    "prisma": "^4.11.0",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.9.5"
+  },
+  "scripts": {
+    "compile": "tsc",
+    "dev": "ts-node-dev src/app/main",
+    "start": "node ./build/app/main.js",
+    "codegen": "graphql-codegen --config codegen.ts"
+  }
+}
