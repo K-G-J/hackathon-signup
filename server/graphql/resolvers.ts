@@ -54,96 +54,78 @@ export const resolvers = {
   },
   Mutation: {
     // HACKER MUTATIONS
-    addHacker: async (
-      _parent: any,
-      args: Prisma.HackerCreateInput,
-      ctx: Context
-    ) => {
+    addHacker: async (_parent: any, args: any, ctx: Context) => {
+      const input: Prisma.HackerCreateInput = args.input;
       const response = await ctx.prisma.hacker.create({
         data: {
-          ...args
+          ...input
         }
       });
 
       return response;
     },
-    updateHacker: async (
-      _parent: any,
-      args: Prisma.HackerCreateInput,
-      ctx: Context
-    ) => {
+    updateHacker: async (_parent: any, args: any, ctx: Context) => {
       const { email } = args;
+      const input: Prisma.HackerCreateInput = args.input;
 
       const response = await ctx.prisma.hacker.update({
         where: {
           email
         },
         data: {
-          ...args
+          ...input
         }
       });
 
       return response;
     },
     // PARTNER MUTATIONS
-    addPartner: async (
-      _parent: any,
-      args: Prisma.PartnerCreateInput,
-      ctx: Context
-    ) => {
+    addPartner: async (_parent: any, args: any, ctx: Context) => {
+      const input: Prisma.PartnerCreateInput = args.input;
       const response = await ctx.prisma.partner.create({
         data: {
-          ...args
+          ...input
         }
       });
 
       return response;
     },
-    updatePartner: async (
-      _parent: any,
-      args: Prisma.PartnerCreateInput,
-      ctx: Context
-    ) => {
+    updatePartner: async (_parent: any, args: any, ctx: Context) => {
       const { email } = args;
+      const input: Prisma.PartnerCreateInput = args.input;
 
       const response = await ctx.prisma.partner.update({
         where: {
           email
         },
         data: {
-          ...args
+          ...input
         }
       });
 
       return response;
     },
     // MENTOR MUTATIONS
-    addMentor: async (
-      _parent: any,
-      args: Prisma.MentorCreateInput,
-      ctx: Context
-    ) => {
+    addMentor: async (_parent: any, args: any, ctx: Context) => {
+      const input: Prisma.MentorCreateInput = args.input;
       const response = await ctx.prisma.mentor.create({
         data: {
-          ...args
+          ...input
         }
       });
 
       return response;
     },
-    updateMentor: async (
-      _parent: any,
-      args: Prisma.MentorCreateInput,
-      ctx: Context
-    ) => {
+    updateMentor: async (_parent: any, args: any, ctx: Context) => {
       const { email } = args;
+      const input: Prisma.MentorCreateInput = args.input;
 
       const response = await ctx.prisma.mentor.update({
         where: {
           email
         },
         data: {
-          ...args
+          ...input
         }
       });
 

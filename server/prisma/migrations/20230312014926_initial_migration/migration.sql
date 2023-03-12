@@ -18,7 +18,7 @@ CREATE TABLE "Hacker" (
     "linkedIn" TEXT,
     "yearsOfSoftwareExperience" INTEGER NOT NULL DEFAULT 0,
     "ethExperienceLevel" "ETHExperience" NOT NULL DEFAULT 'BEGINNER',
-    "Motivation" "hackerMotivation" NOT NULL,
+    "motivation" "hackerMotivation" NOT NULL,
     "priorBuilds" VARCHAR(500) NOT NULL,
     "lookingToBuild" VARCHAR(500) NOT NULL,
     "rulesAccepted" BOOLEAN NOT NULL,

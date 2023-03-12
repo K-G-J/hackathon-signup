@@ -100,6 +100,7 @@ export const typeDefs = gql`
     motivation: hackerMotivation!
     priorBuilds: String
     lookingToBuild: String
+    rulesAccepted: Boolean
   }
   input PartnerInput {
     email: String!
@@ -110,6 +111,7 @@ export const typeDefs = gql`
     telegram: String
     twitter: String
     otherEvents: String
+    rulesAccepted: Boolean
   }
   input MentorInput {
     email: String!
@@ -124,5 +126,6 @@ export const typeDefs = gql`
     ethExperienceLevel: ETHExperience!
     priorMentor: String!
     motivation: String
+    rulesAccepted: Boolean
   }
 `;

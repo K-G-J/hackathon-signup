@@ -20,7 +20,7 @@ model Hacker {
   linkedIn                  String?
   yearsOfSoftwareExperience Int               @default(0)
   ethExperienceLevel        ETHExperience     @default(BEGINNER)
-  Motivation                hackerMotivation
+  motivation                hackerMotivation
   priorBuilds               String            @db.VarChar(500)
   lookingToBuild            String            @db.VarChar(500)
   rulesAccepted             Boolean
