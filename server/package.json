@@ -1,8 +1,7 @@
 {
-  "name": "code-challenge-kate",
+  "name": "server",
   "version": "1.0.0",
-  "main": "index.js",
-  "repository": "git@github.com:ethglobal/code-challenge-kate.git",
+  "main": "index.ts",
   "author": "Kate Johnson <johnson.kat.g@gmail.com>",
   "license": "MIT",
   "devDependencies": {
@@ -20,7 +19,6 @@
   "scripts": {
     "compile": "tsc",
     "dev": "ts-node-dev src/app/main",
-    "start": "node ./build/app/main.js",
-    "codegen": "graphql-codegen --config codegen.ts"
+    "start": "nodemon index.ts"
   }
 }

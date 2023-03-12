@@ -1,0 +1,17 @@
+{
+  "name": "code-challenge-kate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ethglobal/code-challenge-kate.git",
+  "author": "Kate Johnson <johnson.kat.g@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.21"
+  },
+  "scripts": {
+    "server": "node index.ts",
+    "client": "yarn run dev",
+    "dev": "concurrently \"cd server && yarn run start\" \"cd client && yarn run dev\""
+  }
+}
