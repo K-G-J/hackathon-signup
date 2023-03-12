@@ -15,9 +15,9 @@ export const typeDefs = gql`
     addHacker(input: HackerInput): Hacker
     addPartner(input: PartnerInput): Partner
     addMentor(input: MentorInput): Mentor
-    updateHacker(email: String!, input: HackerInput): Hacker
-    updatePartner(email: String!, input: PartnerInput): Partner
-    updateMentor(email: String!, input: MentorInput): Mentor
+    updateHacker(email: String!, input: HackerInput!): Hacker
+    updatePartner(email: String!, input: PartnerInput!): Partner
+    updateMentor(email: String!, input: MentorInput!): Mentor
   }
   # OBJECTTYPES
   type Hacker {
