@@ -1,9 +1,8 @@
-import { useRouter } from 'next/navigation'
 import { ChangeEvent, ReactElement, useState } from 'react'
+import Link from 'next/link'
 
 export default function signup(): ReactElement {
   const [role, setRole] = useState<'hacker' | 'partner' | 'mentor'>('hacker')
-  const router = useRouter()
 
   const onOptionChange = (e: ChangeEvent<HTMLInputElement>): void => {
     if (e.target.value === 'hacker') {
@@ -76,13 +75,14 @@ export default function signup(): ReactElement {
         </div>
       </div>
       <div className="flex items-center m-10">
-        <button
-          type="button"
-          className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-base font-semibold text-white outline-none"
-          onClick={() => router.replace(`/${role}-form`)}
-        >
-          Submit
-        </button>
+        <Link href={`/${role}-form`}>
+          <button
+            type="button"
+            className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-base font-semibold text-white outline-none"
+          >
+            Submit
+          </button>
+        </Link>
       </div>
     </div>
   )
