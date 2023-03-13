@@ -12,6 +12,8 @@ datasource db {
 
 model Hacker {
   id                        String            @id @default(cuid())
+  createdAt                 DateTime          @default(now())
+  updatedAt                 DateTime          @updatedAt
   email                     String            @unique
   firstName                 String
   lastName                  String
@@ -29,6 +31,8 @@ model Hacker {
 
 model Partner {
   id                String            @id @default(cuid())
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
   email             String            @unique
   firstName         String
   lastName          String
@@ -43,6 +47,8 @@ model Partner {
 
 model Mentor {
   id                        String            @id @default(cuid())
+  createdAt                 DateTime          @default(now())
+  updatedAt                 DateTime          @updatedAt
   email                     String            @unique
   firstName                 String
   lastName                  String

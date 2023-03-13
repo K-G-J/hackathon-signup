@@ -22,6 +22,8 @@ export const typeDefs = gql`
   # OBJECTTYPES
   type Hacker {
     id: String!
+    createdAt: String!
+    updatedAt: String
     email: String!
     firstName: String!
     lastName: String!
@@ -38,6 +40,8 @@ export const typeDefs = gql`
   }
   type Partner {
     id: String!
+    createdAt: String!
+    updatedAt: String
     email: String!
     firstName: String!
     lastName: String!
@@ -51,6 +55,8 @@ export const typeDefs = gql`
   }
   type Mentor {
     id: String!
+    createdAt: String!
+    updatedAt: String
     email: String!
     firstName: String!
     lastName: String!

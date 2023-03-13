@@ -4,6 +4,8 @@ export const GETHACKER = gql`
   query GetHacker($email: String!) {
     getHacker(email: $email) {
       id
+      createdAt
+      updatedAt
       email
       firstName
       lastName
@@ -25,6 +27,8 @@ export const GETPARTNER = gql`
   query GetPartner($email: String!) {
     getPartner(email: $email) {
       id
+      createdAt
+      updatedAt
       email
       firstName
       lastName
@@ -43,6 +47,8 @@ export const GETMENTOR = gql`
   query GetMentor($email: String!) {
     getMentor(email: $email) {
       id
+      createdAt
+      updatedAt
       email
       firstName
       lastName

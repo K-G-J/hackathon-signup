@@ -3,6 +3,8 @@ import { ReactElement, createContext, useState } from 'react'
 export interface IHacker {
   getHacker: {
     id: string
+    createdAt: string
+    updatedAt: string
     email: string
     firstName: string
     lastName: string
@@ -22,6 +24,8 @@ export interface IHacker {
 export interface IPartner {
   getPartner: {
     id: string
+    createdAt: string
+    updatedAt: string
     email: string
     firstName: string
     lastName: string
@@ -38,6 +42,8 @@ export interface IPartner {
 export interface IMentor {
   getMentor: {
     id: string
+    createdAt: string
+    updatedAt: string
     email: string
     firstName: string
     lastName: string
