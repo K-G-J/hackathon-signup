@@ -1,9 +1,32 @@
 import { useGlobalContext } from '@/context'
 import Head from 'next/head'
-import { ReactElement, useState } from 'react'
+import { ReactElement, useState, useEffect } from 'react'
+import { useLazyQuery } from '@apollo/client'
+import { GETHACKER, GETPARTNER, GETMENTOR } from '../lib/queries'
+import { IHacker, IPartner, IMentor } from '@/context/context'
+import { useRouter } from 'next/router'
+
+export const validateEmail = (email: string) => {
+  return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+    email.toLowerCase(),
+  )
+}
 
 export default function Home(): ReactElement {
   const [email, setEmail] = useState<string>('')
+  const [emailError, setEmailError] = useState<string>('')
+  const [
+    fetchHacker,
+    { loading: hackerLoading, error: hackerError, data: hackerData },
+  ] = useLazyQuery<IHacker>(GETHACKER)
+  const [
+    fetchPartner,
+    { loading: partnerLoading, error: partnerError, data: partnerData },
+  ] = useLazyQuery<IPartner>(GETPARTNER)
+  const [
+    fetchMentor,
+    { loading: mentorLoading, error: mentorError, data: mentorData },
+  ] = useLazyQuery<IMentor>(GETMENTOR)
   const {
     hacker,
     setHacker,
@@ -12,6 +35,38 @@ export default function Home(): ReactElement {
     mentor,
     setMentor,
   } = useGlobalContext()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!hackerLoading && hackerData?.getHacker) {
+      setHacker(hackerData.getHacker)
+      router.replace('/hacker-form')
+    } else if (!partnerLoading && partnerData?.getPartner) {
+      setPartner(partnerData.getPartner)
+      router.replace('/partner-form')
+    } else if (!mentorLoading && mentorData?.getMentor) {
+      setMentor(mentorData.getMentor)
+      router.replace('/mentor-form')
+    }
+  }, [hackerData, partnerData, mentorData])
+
+  const handleClick = async (): Promise<void> => {
+    if (!email || !validateEmail(email)) {
+      setEmailError('Please enter a valid email address')
+      return
+    }
+    const fetchHackerRes = fetchHacker({ variables: { email } })
+    const fetchPartnerRes = fetchPartner({ variables: { email } })
+    const fetchMentorRes = fetchMentor({ variables: { email } })
+    await Promise.all([fetchHackerRes, fetchPartnerRes, fetchMentorRes])
+    if (
+      hackerData === undefined &&
+      partnerData === undefined &&
+      mentorData === undefined
+    ) {
+      router.replace('signup')
+    }
+  }
 
   return (
     <>
@@ -27,6 +82,7 @@ export default function Home(): ReactElement {
           </h1>
           <form>
             <div className="mb-5">
+              <p className="mb-5 text-red-500">{emailError}</p>
               <input
                 type="email"
                 name="email"
@@ -38,8 +94,9 @@ export default function Home(): ReactElement {
             </div>
             <div>
               <button
-                type="submit"
+                type="button"
                 className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-base font-semibold text-white outline-none"
+                onClick={handleClick}
               >
                 Submit
               </button>
