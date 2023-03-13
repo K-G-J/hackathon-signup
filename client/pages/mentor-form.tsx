@@ -1,10 +1,7 @@
-import { useGlobalContext } from '@/context'
 import React from 'react'
 
 type Props = {}
 
-export default function mentorForm({ }: Props) {
-  const { mentor } = useGlobalContext()
-  console.log(mentor)
-  return <div>MENTOR FORM</div>
+export default function mentorForm({}: Props) {
+  return <div>NEW MENTOR FORM</div>
 }

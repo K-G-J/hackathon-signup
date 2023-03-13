@@ -4,13 +4,9 @@ import { ReactElement, useState, useEffect, FormEvent, MouseEvent } from 'react'
 import { useLazyQuery } from '@apollo/client'
 import { GETHACKER, GETPARTNER, GETMENTOR } from '../lib/queries'
 import { IHacker, IPartner, IMentor } from '@/context/context'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
+import { validateEmail } from '@/lib/dataValidation'
 
-export const validateEmail = (email: string) => {
-  return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
-    email.toLowerCase(),
-  )
-}
 
 export default function Home(): ReactElement {
   const [email, setEmail] = useState<string>('')
@@ -33,13 +29,13 @@ export default function Home(): ReactElement {
   useEffect(() => {
     if (!hackerLoading && hackerData?.getHacker) {
       setHacker(hackerData.getHacker)
-      router.replace('/hacker-form')
+      router.replace('/edit-hacker-form')
     } else if (!partnerLoading && partnerData?.getPartner) {
       setPartner(partnerData.getPartner)
-      router.replace('/partner-form')
+      router.replace('/edit-partner-form')
     } else if (!mentorLoading && mentorData?.getMentor) {
       setMentor(mentorData.getMentor)
-      router.replace('/mentor-form')
+      router.replace('/edit-mentor-form')
     }
   }, [hackerData, partnerData, mentorData])
 
