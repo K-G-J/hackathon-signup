@@ -7,7 +7,6 @@ import { IHacker, IPartner, IMentor } from '@/context/context'
 import { useRouter } from 'next/navigation'
 import { validateEmail } from '@/lib/dataValidation'
 
-
 export default function Home(): ReactElement {
   const [email, setEmail] = useState<string>('')
   const [emailError, setEmailError] = useState<string>('')
@@ -54,9 +53,9 @@ export default function Home(): ReactElement {
     const fetchMentorRes = fetchMentor({ variables: { email } })
     await Promise.all([fetchHackerRes, fetchPartnerRes, fetchMentorRes])
     if (
-      hackerData === undefined &&
-      partnerData === undefined &&
-      mentorData === undefined
+      hackerData?.getHacker === null &&
+      partnerData?.getPartner === null &&
+      mentorData?.getMentor === null
     ) {
       router.replace('signup')
     }
