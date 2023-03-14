@@ -6,7 +6,7 @@ import {
   validateGithub,
   validateLength,
   validateLinkedIn,
-} from '../lib/dataValidation'
+} from '../lib/utils/dataValidation'
 import { IHacker } from '@/context/context'
 import { useRouter } from 'next/navigation'
 import { GETHACKER } from '@/lib/queries'
@@ -114,17 +114,21 @@ export default function hackerForm(): ReactElement {
     }
   }
 
-  const handlePriorBuildsInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const handlePriorBuildsInput = (
+    e: ChangeEvent<HTMLTextAreaElement>,
+  ): void => {
     setPriorBuildsCount(e.target.value.length)
     setForm({ ...form, priorBuilds: e.target.value })
   }
 
-  const handleLookingToBuildInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleLookingToBuildInput = (
+    e: ChangeEvent<HTMLTextAreaElement>,
+  ): void => {
     setLookingToBuildCount(e.target.value.length)
     setForm({ ...form, lookingToBuild: e.target.value })
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (): Promise<void> => {
     if (!form.firstName) {
       setError({ type: 'firstName', message: 'please enter your first name' })
       return
@@ -173,13 +177,6 @@ export default function hackerForm(): ReactElement {
       return
     }
     await addHacker({ variables: { input: { ...form } } })
-    if (!addHackerError) {
-      await fetchHacker({ variables: { email: form.email } })
-      if (hackerData) {
-        setHacker(hackerData.getHacker)
-        router.replace('/success')
-      }
-    }
   }
 
   return (
@@ -307,7 +304,7 @@ export default function hackerForm(): ReactElement {
                   id="github"
                   placeholder="https://github.com/yourusername"
                   onChange={(e) => setForm({ ...form, github: e.target.value })}
-                  className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                  className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base text-xs font-small text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                 />
               </div>
             </div>
@@ -331,7 +328,7 @@ export default function hackerForm(): ReactElement {
                   onChange={(e) =>
                     setForm({ ...form, linkedIn: e.target.value })
                   }
-                  className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                  className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-[0.7rem] font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                 />
               </div>
             </div>

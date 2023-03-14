@@ -33,10 +33,12 @@ export const GETPARTNER = gql`
       firstName
       lastName
       website
+      organization
       linkedIn
       telegram
       twitter
       otherEvents
+      motivation
       rulesAccepted
       applicationStatus
     }

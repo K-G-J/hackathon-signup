@@ -45,3 +45,47 @@ export const UPDATEHACKER = gql`
     }
   }
 `;
+
+export const ADDPARTNER = gql`
+  mutation AddPartner($input: PartnerInput!) {
+    addPartner(input: $input) {
+      id
+      createdAt
+      updatedAt
+      email
+      firstName
+      lastName
+      website
+      organization
+      linkedIn
+      telegram
+      twitter
+      otherEvents
+      motivation
+      rulesAccepted
+      applicationStatus
+    }
+  }
+`;
+
+export const UPDATEPARTNER = gql`
+  mutation UpdatePartner($email: String!, $input: PartnerInput!) {
+    updatePartner(email: $email, input: $input) {
+      id
+      createdAt
+      updatedAt
+      email
+      firstName
+      lastName
+      website
+      organization
+      linkedIn
+      telegram
+      twitter
+      otherEvents
+      motivation
+      rulesAccepted
+      applicationStatus
+    }
+  }
+`;

@@ -30,10 +30,12 @@ export interface IPartner {
     firstName: string
     lastName: string
     website: string
+    organization: string
     linkedIn: string
     telegram: string
     twitter: string
     otherEvents: string
+    motivation: string
     rulesAccepted: boolean
     applicationStatus: string
   }

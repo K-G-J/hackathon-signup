@@ -46,10 +46,12 @@ export const typeDefs = gql`
     firstName: String!
     lastName: String!
     website: String
+    organization: String!
     linkedIn: String
     telegram: String
     twitter: String
     otherEvents: String
+    motivation: String!
     rulesAccepted: Boolean
     applicationStatus: applicationStatus!
   }
@@ -106,18 +108,20 @@ export const typeDefs = gql`
     motivation: hackerMotivation!
     priorBuilds: String
     lookingToBuild: String
-    rulesAccepted: Boolean
+    rulesAccepted: Boolean!
   }
   input PartnerInput {
     email: String!
     firstName: String!
     lastName: String!
     website: String
+    organization: String!
     linkedIn: String
     telegram: String
     twitter: String
     otherEvents: String
-    rulesAccepted: Boolean
+    motivation: String!
+    rulesAccepted: Boolean!
   }
   input MentorInput {
     email: String!
@@ -132,6 +136,6 @@ export const typeDefs = gql`
     ethExperienceLevel: ETHExperience!
     priorMentor: String!
     motivation: String
-    rulesAccepted: Boolean
+    rulesAccepted: Boolean!
   }
 `;

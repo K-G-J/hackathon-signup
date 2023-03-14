@@ -6,13 +6,14 @@ import {
   validateGithub,
   validateLength,
   validateLinkedIn,
-} from '../lib/dataValidation'
+} from '../lib/utils/dataValidation'
 import { IHacker } from '@/context/context'
 import { IHackerFormError, IHackerInput } from './hacker-form'
 import { useGlobalContext } from '../context/index'
 import { GETHACKER } from '@/lib/queries'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+import { styleApplicationStatus } from '@/lib/utils/helpers'
 
 export default function editHackerForm(): ReactElement {
   const { hacker, setHacker } = useGlobalContext()
@@ -81,17 +82,21 @@ export default function editHackerForm(): ReactElement {
     }
   }
 
-  const handlePriorBuildsInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const handlePriorBuildsInput = (
+    e: ChangeEvent<HTMLTextAreaElement>,
+  ): void => {
     setPriorBuildsCount(e.target.value.length)
     setForm({ ...form, priorBuilds: e.target.value })
   }
 
-  const handleLookingToBuildInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleLookingToBuildInput = (
+    e: ChangeEvent<HTMLTextAreaElement>,
+  ): void => {
     setLookingToBuildCount(e.target.value.length)
     setForm({ ...form, lookingToBuild: e.target.value })
   }
 
-  const handleUpdate = async () => {
+  const handleUpdate = async (): Promise<void> => {
     if (!form.firstName) {
       setError({ type: 'firstName', message: 'please enter your first name' })
       return
@@ -152,6 +157,18 @@ export default function editHackerForm(): ReactElement {
   return (
     <div className="flex items-center justify-center p-12">
       <div className="mx-auto w-full max-w-[550px]">
+        <p className="mb-3 block text-base font-medium text-xl text-[#07074D]">
+          You have already signed up to be a hacker
+        </p>
+        <p className="mb-3 block text-base font-medium text-xl text-[#07074D]">
+          Your application status is{' '}
+          <span className={styleApplicationStatus(hacker!.applicationStatus)}>
+            {hacker!.applicationStatus}
+          </span>
+        </p>
+        <p className="mb-3 block text-base font-medium text-l text-[#07074D]">
+          You can edit your application below
+        </p>
         <form>
           <div className="-mx-3 flex flex-wrap">
             {updateHackerError && (
@@ -274,7 +291,7 @@ export default function editHackerForm(): ReactElement {
                   id="github"
                   defaultValue={hacker!.github}
                   onChange={(e) => setForm({ ...form, github: e.target.value })}
-                  className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                  className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base text-xs font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                 />
               </div>
             </div>
@@ -298,7 +315,7 @@ export default function editHackerForm(): ReactElement {
                   onChange={(e) =>
                     setForm({ ...form, linkedIn: e.target.value })
                   }
-                  className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                  className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base text-[0.7rem] font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                 />
               </div>
             </div>
@@ -342,6 +359,7 @@ export default function editHackerForm(): ReactElement {
                 <select
                   id="ethExperienceLevel"
                   onChange={handleETHExperienceSelect}
+                  defaultValue={hacker!.ethExperienceLevel}
                   className="mb-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 >
                   <option value="BEGINNER">beginner</option>
@@ -362,6 +380,7 @@ export default function editHackerForm(): ReactElement {
           <select
             id="motivation"
             onChange={handleMotivationSelect}
+            defaultValue={hacker!.motivation}
             className="mb-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
             <option value="ATTENDWORKSHOPS">

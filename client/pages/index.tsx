@@ -5,7 +5,7 @@ import { useLazyQuery } from '@apollo/client'
 import { GETHACKER, GETPARTNER, GETMENTOR } from '../lib/queries'
 import { IHacker, IPartner, IMentor } from '@/context/context'
 import { useRouter } from 'next/navigation'
-import { validateEmail } from '@/lib/dataValidation'
+import { validateEmail } from '@/lib/utils/dataValidation'
 
 export default function Home(): ReactElement {
   const [email, setEmail] = useState<string>('')

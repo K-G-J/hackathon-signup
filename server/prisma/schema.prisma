@@ -37,10 +37,12 @@ model Partner {
   firstName         String
   lastName          String
   website           String?
+  organization      String
   linkedIn          String?
   telegram          String?
   twitter           String?
   otherEvents       String            @db.VarChar(500)
+  motivation        String            @db.VarChar(500)
   rulesAccepted     Boolean
   applicationStatus applicationStatus @default(PENDING)
 }
