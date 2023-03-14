@@ -1,4 +1,4 @@
-import { ADDPARTNER } from '@/lib/mutations'
+import { UPDATEPARTNER } from '@/lib/mutations'
 import { useLazyQuery, useMutation } from '@apollo/client'
 import React, { ChangeEvent, ReactElement, useEffect, useState } from 'react'
 import {
@@ -10,47 +10,21 @@ import { IPartner } from '@/context/context'
 import { useRouter } from 'next/navigation'
 import { GETPARTNER } from '@/lib/queries'
 import { useGlobalContext } from '@/context'
-
-export interface IPartnerInput {
-  firstName: string
-  lastName: string
-  email: string
-  website?: string
-  organization: string
-  linkedIn?: string
-  telegram?: string
-  twitter?: string
-  otherEvents?: string
-  motivation: string
-  rulesAccepted: boolean
-}
-
-export interface IPartnerFormError {
-  type:
-    | ''
-    | 'firstName'
-    | 'lastName'
-    | 'email'
-    | 'organization'
-    | 'linkedIn'
-    | 'otherEvents'
-    | 'motivation'
-    | 'rulesAccepted'
-  message: string
-}
+import { IPartnerFormError, IPartnerInput } from './partner-form'
 
 export default function partnerForm(): ReactElement {
+  const { partner, setPartner } = useGlobalContext()
   const [form, setForm] = useState<IPartnerInput>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    website: '',
-    organization: '',
-    linkedIn: '',
-    telegram: '',
-    twitter: '',
-    otherEvents: '',
-    motivation: '',
+    firstName: partner!.firstName,
+    lastName: partner!.lastName,
+    email: partner!.email,
+    website: partner!.website,
+    organization: partner!.organization,
+    linkedIn: partner!.linkedIn,
+    telegram: partner!.telegram,
+    twitter: partner!.twitter,
+    otherEvents: partner!.otherEvents,
+    motivation: partner!.motivation,
     rulesAccepted: false,
   })
   const [error, setError] = useState<IPartnerFormError>({
@@ -59,24 +33,27 @@ export default function partnerForm(): ReactElement {
   })
   const [otherEventsCount, setOtherEventsCount] = useState<number>(0)
   const [motivationCount, setMotivationCount] = useState<number>(0)
-  const [addPartner, { data, error: addPartnerError }] = useMutation<IPartner>(
-    ADDPARTNER,
+  const [updatePartner, { data, error: updatePartnerError }] = useMutation(
+    UPDATEPARTNER,
   )
-  const [fetchPartner, { data: partnerData }] = useLazyQuery<IPartner>(
+  const [fetchPartner, { data: partnerData, loading }] = useLazyQuery<IPartner>(
     GETPARTNER,
   )
-  const { setPartner } = useGlobalContext()
   const router = useRouter()
 
   useEffect(() => {
-    if (!addPartnerError) {
+    checkSuccess()
+  }, [data, loading])
+
+  const checkSuccess = () => {
+    if (!updatePartnerError) {
       fetchPartner({ variables: { email: form.email } })
       if (partnerData?.getPartner != null) {
         setPartner(partnerData.getPartner)
         router.replace('/success')
       }
     }
-  }, [data])
+  }
 
   const handleOtherEventsInput = (
     e: ChangeEvent<HTMLTextAreaElement>,
@@ -138,7 +115,9 @@ export default function partnerForm(): ReactElement {
       })
       return
     }
-    await addPartner({ variables: { input: { ...form } } })
+    await updatePartner({
+      variables: { email: partner!.email, input: { ...form } },
+    })
   }
 
   return (
@@ -146,7 +125,7 @@ export default function partnerForm(): ReactElement {
       <div className="mx-auto w-full max-w-[550px]">
         <form>
           <div className="-mx-3 flex flex-wrap">
-            {addPartnerError && (
+            {updatePartnerError && (
               <p className="mb-5 text-red-500">
                 Something went wrong, please try again
               </p>
@@ -167,7 +146,7 @@ export default function partnerForm(): ReactElement {
                   type="text"
                   name="fName"
                   id="fName"
-                  placeholder="First Name"
+                  defaultValue={partner!.firstName}
                   onChange={(e) =>
                     setForm({ ...form, firstName: e.target.value })
                   }
@@ -191,7 +170,7 @@ export default function partnerForm(): ReactElement {
                   type="text"
                   name="lName"
                   id="lName"
-                  placeholder="Last Name"
+                  defaultValue={partner!.lastName}
                   onChange={(e) =>
                     setForm({ ...form, lastName: e.target.value })
                   }
@@ -218,7 +197,7 @@ export default function partnerForm(): ReactElement {
                   type="text"
                   name="email"
                   id="email"
-                  placeholder="example@domain.com"
+                  defaultValue={partner!.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                 />
@@ -237,7 +216,7 @@ export default function partnerForm(): ReactElement {
                   type="text"
                   name="website"
                   id="website"
-                  placeholder="https://yourwebsite.com"
+                  defaultValue={partner!.website}
                   onChange={(e) =>
                     setForm({ ...form, website: e.target.value })
                   }
@@ -261,7 +240,7 @@ export default function partnerForm(): ReactElement {
                   type="text"
                   name="organization"
                   id="organization"
-                  placeholder="Your Organization Name"
+                  defaultValue={partner!.organization}
                   onChange={(e) =>
                     setForm({ ...form, organization: e.target.value })
                   }
@@ -285,7 +264,7 @@ export default function partnerForm(): ReactElement {
                   type="text"
                   name="linkedIn"
                   id="linkedIn"
-                  placeholder="https://www.linkedin.com/in/yourname"
+                  defaultValue={partner!.linkedIn}
                   onChange={(e) =>
                     setForm({ ...form, linkedIn: e.target.value })
                   }
@@ -309,7 +288,7 @@ export default function partnerForm(): ReactElement {
                   type="text"
                   name="telegram"
                   id="telegram"
-                  placeholder="@yourusername"
+                  defaultValue={partner!.telegram}
                   onChange={(e) =>
                     setForm({ ...form, telegram: e.target.value })
                   }
@@ -330,7 +309,7 @@ export default function partnerForm(): ReactElement {
                   type="text"
                   name="twitter"
                   id="twitter"
-                  placeholder="@yourtwitterhandle"
+                  defaultValue={partner!.twitter}
                   onChange={(e) =>
                     setForm({ ...form, twitter: e.target.value })
                   }
@@ -356,7 +335,7 @@ export default function partnerForm(): ReactElement {
             <textarea
               name="otherEvents"
               id="otherEvents"
-              placeholder="I supported the event . . ."
+              defaultValue={partner!.otherEvents}
               onChange={handleOtherEventsInput}
               className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
             />
@@ -378,7 +357,7 @@ export default function partnerForm(): ReactElement {
             <textarea
               name="motivation"
               id="motivation"
-              placeholder="I want to be a partner for this hackathon because . . ."
+              defaultValue={partner!.motivation}
               onChange={handleMotivationInput}
               className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
             />
@@ -422,7 +401,7 @@ export default function partnerForm(): ReactElement {
               onClick={handleSubmit}
               className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
             >
-              Submit
+              Update
             </button>
           </div>
         </form>

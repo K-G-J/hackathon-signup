@@ -70,14 +70,16 @@ export default function hackerForm(): ReactElement {
   })
   const [priorBuildsCount, setPriorBuildsCount] = useState<number>(0)
   const [lookingToBuildCount, setLookingToBuildCount] = useState<number>(0)
-  const [addHacker, { data, error: addHackerError }] = useMutation<IHacker>(
-    ADDHACKER,
-  )
-  const [fetchHacker, { data: hackerData }] = useLazyQuery<IHacker>(GETHACKER)
+  const [addHacker, { data, error: addHackerError }] = useMutation(ADDHACKER)
+  const [fetchHacker, { data: hackerData, loading }] = useLazyQuery<IHacker>(GETHACKER)
   const { setHacker } = useGlobalContext()
   const router = useRouter()
 
   useEffect(() => {
+    checkSuccess()
+  }, [data, loading])
+
+  const checkSuccess = () => {
     if (!addHackerError) {
       fetchHacker({ variables: { email: form.email } })
       if (hackerData?.getHacker != null) {
@@ -85,7 +87,7 @@ export default function hackerForm(): ReactElement {
         router.replace('/success')
       }
     }
-  }, [data])
+  }
 
   const handleETHExperienceSelect = (
     e: ChangeEvent<HTMLSelectElement>,

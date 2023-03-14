@@ -53,9 +53,9 @@ export default function Home(): ReactElement {
     const fetchMentorRes = fetchMentor({ variables: { email } })
     await Promise.all([fetchHackerRes, fetchPartnerRes, fetchMentorRes])
     if (
-      hackerData?.getHacker === null &&
-      partnerData?.getPartner === null &&
-      mentorData?.getMentor === null
+      hackerData?.getHacker == null &&
+      partnerData?.getPartner == null &&
+      mentorData?.getMentor == null
     ) {
       router.replace('signup')
     }

@@ -4,7 +4,7 @@ import { styleApplicationStatus } from '@/lib/utils/helpers'
 
 export default function sucess(): ReactElement {
   const { hacker, partner, mentor } = useGlobalContext()
-  console.log(partner)
+
   return (
     <div className="flex items-center justify-center p-12">
       <div className="mx-auto w-full max-w-[550px]">
