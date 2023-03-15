@@ -3,7 +3,7 @@ import React from 'react'
 
 function Footer(): JSX.Element {
   return (
-    <div className="inset-x-0 bottom-0 overflow-auto">
+    <div className="flex inset-x-0 bottom-0 overflow-auto">
       <footer className="w-screen p-4 bg-white rounded-lg shadow md:items-center md:justify-between dark:bg-gray-800 w-100">
         <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
           © 2023{' '}

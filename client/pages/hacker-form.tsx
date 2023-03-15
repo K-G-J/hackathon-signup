@@ -71,7 +71,9 @@ export default function hackerForm(): ReactElement {
   const [priorBuildsCount, setPriorBuildsCount] = useState<number>(0)
   const [lookingToBuildCount, setLookingToBuildCount] = useState<number>(0)
   const [addHacker, { data, error: addHackerError }] = useMutation(ADDHACKER)
-  const [fetchHacker, { data: hackerData, loading }] = useLazyQuery<IHacker>(GETHACKER)
+  const [fetchHacker, { data: hackerData, loading }] = useLazyQuery<IHacker>(
+    GETHACKER,
+  )
   const { setHacker } = useGlobalContext()
   const router = useRouter()
 
@@ -271,7 +273,7 @@ export default function hackerForm(): ReactElement {
                   htmlFor="website"
                   className="mb-3 block text-base font-medium text-[#07074D]"
                 >
-                  website
+                  Website
                 </label>
                 <input
                   type="text"
@@ -344,7 +346,7 @@ export default function hackerForm(): ReactElement {
                   htmlFor="yearsOfSoftwareExperience"
                   className="mb-3 block text-base font-medium text-[#07074D]"
                 >
-                  How many years of experience do you have with sofware
+                  How many years of experience do you have with software
                   development?
                 </label>
                 <input

@@ -12,7 +12,7 @@ function Header(): JSX.Element {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="shortcut icon" href="/ethglobalicon.jpeg" />
       </Head>
-      <header className="header sticky top-0 bg-white shadow-md flex items-center justify-between px-8 py-02">
+      <header className="header sticky flex top-0 bg-white shadow-md flex items-center justify-between px-8 py-02">
         <h1 className="w-3/12">
           <Link href="/">
             <Image src="/ethglobal-banner.png" alt="ETHGlobal logo" width={200} height={200}/>

@@ -11,9 +11,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <GlobalContextProvider>
       <ApolloProvider client={client}>
         <Header />
-        <div className="flex flex-col overflow-auto h-screen">
+        <main className="flex flex-col overflow-auto h-screen">
           <Component {...pageProps} />
-        </div>
+        </main>
         <Footer />
       </ApolloProvider>
     </GlobalContextProvider>

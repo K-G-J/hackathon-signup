@@ -61,7 +61,7 @@ model Mentor {
   twitter                   String?
   yearsOfSoftwareExperience Int               @default(0)
   ethExperienceLevel        ETHExperience     @default(BEGINNER)
-  priorMentor               String            @db.VarChar(500)
+  priorMentor               String?           @db.VarChar(500)
   motivation                String            @db.VarChar(500)
   rulesAccepted             Boolean
   applicationStatus         applicationStatus @default(PENDING)

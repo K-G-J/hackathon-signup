@@ -65,7 +65,7 @@ CREATE TABLE "Mentor" (
     "twitter" TEXT,
     "yearsOfSoftwareExperience" INTEGER NOT NULL DEFAULT 0,
     "ethExperienceLevel" "ETHExperience" NOT NULL DEFAULT 'BEGINNER',
-    "priorMentor" VARCHAR(500) NOT NULL,
+    "priorMentor" VARCHAR(500),
     "motivation" VARCHAR(500) NOT NULL,
     "rulesAccepted" BOOLEAN NOT NULL,
     "applicationStatus" "applicationStatus" NOT NULL DEFAULT 'PENDING',

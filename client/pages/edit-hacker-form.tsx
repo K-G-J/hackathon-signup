@@ -25,9 +25,7 @@ export default function editHackerForm(): ReactElement {
     github: hacker!.github,
     linkedIn: hacker!.linkedIn,
     yearsOfSoftwareExperience: hacker!.yearsOfSoftwareExperience,
-    // @ts-ignore
     ethExperienceLevel: hacker!.ethExperienceLevel,
-    // @ts-ignore
     motivation: hacker!.motivation,
     priorBuilds: hacker!.priorBuilds,
     lookingToBuild: hacker!.lookingToBuild,
@@ -37,8 +35,12 @@ export default function editHackerForm(): ReactElement {
     type: '',
     message: '',
   })
-  const [priorBuildsCount, setPriorBuildsCount] = useState<number>(0)
-  const [lookingToBuildCount, setLookingToBuildCount] = useState<number>(0)
+  const [priorBuildsCount, setPriorBuildsCount] = useState<number>(
+    hacker!.priorBuilds.length,
+  )
+  const [lookingToBuildCount, setLookingToBuildCount] = useState<number>(
+    hacker!.lookingToBuild.length,
+  )
   const [updateHacker, { data, error: updateHackerError }] = useMutation(
     UPDATEHACKER,
   )
@@ -262,7 +264,7 @@ export default function editHackerForm(): ReactElement {
                   htmlFor="website"
                   className="mb-3 block text-base font-medium text-[#07074D]"
                 >
-                  website
+                  Website
                 </label>
                 <input
                   type="text"
@@ -335,7 +337,7 @@ export default function editHackerForm(): ReactElement {
                   htmlFor="yearsOfSoftwareExperience"
                   className="mb-3 block text-base font-medium text-[#07074D]"
                 >
-                  How many years of experience do you have with sofware
+                  How many years of experience do you have with software
                   development?
                 </label>
                 <input

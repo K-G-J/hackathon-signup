@@ -234,7 +234,7 @@ export default function partnerForm(): ReactElement {
                   htmlFor="website"
                   className="mb-3 block text-base font-medium text-[#07074D]"
                 >
-                  website
+                  Website
                 </label>
                 <input
                   type="text"
@@ -258,7 +258,7 @@ export default function partnerForm(): ReactElement {
                   htmlFor="organization"
                   className="mb-3 block text-base font-medium text-[#07074D]"
                 >
-                  organization
+                  Organization
                 </label>
                 <input
                   type="text"
@@ -337,7 +337,7 @@ export default function partnerForm(): ReactElement {
                   onChange={(e) =>
                     setForm({ ...form, twitter: e.target.value })
                   }
-                  className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base text-[0.7rem] font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                  className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                 />
               </div>
             </div>

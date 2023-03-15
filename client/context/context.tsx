@@ -12,8 +12,16 @@ export interface IHacker {
     github: string
     linkedIn: string
     yearsOfSoftwareExperience: number
-    ethExperienceLevel: string
-    motivation: string
+    ethExperienceLevel: 'BEGINNER' | 'INTERMEDIATE' | 'EXPERT'
+    motivation:
+      | 'ATTENDWORKSHOPS'
+      | 'RESUMEBUILD'
+      | 'GETBETTER'
+      | 'MEETCOMPANIES'
+      | 'MEETPEOPLE'
+      | 'LAUNCHPRODUCT'
+      | 'WINPRIZE'
+      | 'OTHER'
     priorBuilds: string
     lookingToBuild: string
     rulesAccepted: boolean
@@ -55,7 +63,7 @@ export interface IMentor {
     telegram: string
     twitter: string
     yearsOfSoftwareExperience: number
-    ethExperienceLevel: string
+    ethExperienceLevel: 'BEGINNER' | 'INTERMEDIATE' | 'EXPERT'
     priorMentor: string
     motivation: string
     rulesAccepted: boolean

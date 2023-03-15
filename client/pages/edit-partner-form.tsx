@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation'
 import { GETPARTNER } from '@/lib/queries'
 import { useGlobalContext } from '@/context'
 import { IPartnerFormError, IPartnerInput } from './partner-form'
+import { styleApplicationStatus } from '@/lib/utils/helpers'
 
 export default function partnerForm(): ReactElement {
   const { partner, setPartner } = useGlobalContext()
@@ -31,8 +32,12 @@ export default function partnerForm(): ReactElement {
     type: '',
     message: '',
   })
-  const [otherEventsCount, setOtherEventsCount] = useState<number>(0)
-  const [motivationCount, setMotivationCount] = useState<number>(0)
+  const [otherEventsCount, setOtherEventsCount] = useState<number>(
+    partner!.otherEvents.length,
+  )
+  const [motivationCount, setMotivationCount] = useState<number>(
+    partner!.motivation.length,
+  )
   const [updatePartner, { data, error: updatePartnerError }] = useMutation(
     UPDATEPARTNER,
   )
@@ -123,6 +128,18 @@ export default function partnerForm(): ReactElement {
   return (
     <div className="flex items-center justify-center p-12">
       <div className="mx-auto w-full max-w-[550px]">
+        <p className="mb-3 block text-base font-medium text-xl text-[#07074D]">
+          You have already signed up to be a partner
+        </p>
+        <p className="mb-3 block text-base font-medium text-xl text-[#07074D]">
+          Your application status is{' '}
+          <span className={styleApplicationStatus(partner!.applicationStatus)}>
+            {partner!.applicationStatus}
+          </span>
+        </p>
+        <p className="mb-3 block text-base font-medium text-l text-[#07074D]">
+          You can edit your application below
+        </p>
         <form>
           <div className="-mx-3 flex flex-wrap">
             {updatePartnerError && (
@@ -210,7 +227,7 @@ export default function partnerForm(): ReactElement {
                   htmlFor="website"
                   className="mb-3 block text-base font-medium text-[#07074D]"
                 >
-                  website
+                  Website
                 </label>
                 <input
                   type="text"
@@ -234,7 +251,7 @@ export default function partnerForm(): ReactElement {
                   htmlFor="organization"
                   className="mb-3 block text-base font-medium text-[#07074D]"
                 >
-                  organization
+                  Organization
                 </label>
                 <input
                   type="text"
@@ -313,7 +330,7 @@ export default function partnerForm(): ReactElement {
                   onChange={(e) =>
                     setForm({ ...form, twitter: e.target.value })
                   }
-                  className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base text-[0.7rem] font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                  className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                 />
               </div>
             </div>

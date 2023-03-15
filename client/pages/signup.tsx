@@ -75,7 +75,7 @@ export default function signup(): ReactElement {
             </label>
           </div>
         </div>
-        <div className="w-full items-center ml-20">
+        <div className="flex items-center m-10 ml-[8rem]">
           <Link href={`/${role}-form`}>
             <button
               type="button"

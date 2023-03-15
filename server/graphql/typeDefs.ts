@@ -134,8 +134,8 @@ export const typeDefs = gql`
     twitter: String
     yearsOfSoftwareExperience: Int!
     ethExperienceLevel: ETHExperience!
-    priorMentor: String!
-    motivation: String
+    priorMentor: String
+    motivation: String!
     rulesAccepted: Boolean!
   }
 `;
