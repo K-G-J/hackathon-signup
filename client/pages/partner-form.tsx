@@ -1,14 +1,12 @@
 import { ADDPARTNER } from '@/lib/mutations'
-import { useLazyQuery, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import React, { ChangeEvent, ReactElement, useEffect, useState } from 'react'
 import {
   validateEmail,
   validateLength,
   validateLinkedIn,
 } from '../lib/utils/dataValidation'
-import { IPartner } from '@/context/context'
 import { useRouter } from 'next/navigation'
-import { GETPARTNER } from '@/lib/queries'
 import { useGlobalContext } from '@/context'
 
 export interface IPartnerInput {
@@ -60,26 +58,17 @@ export default function partnerForm(): ReactElement {
   const [otherEventsCount, setOtherEventsCount] = useState<number>(0)
   const [motivationCount, setMotivationCount] = useState<number>(0)
   const [addPartner, { data, error: addPartnerError }] = useMutation(ADDPARTNER)
-  const [fetchPartner, { data: partnerData, loading }] = useLazyQuery<IPartner>(
-    GETPARTNER,
-  )
   const { setPartner } = useGlobalContext()
   const router = useRouter()
 
   useEffect(() => {
-    checkSuccess()
-  }, [data, loading])
-
-  const checkSuccess = () => {
     if (!addPartnerError) {
-      fetchPartner({ variables: { email: form.email } })
-      if (partnerData?.getPartner != null) {
-        console.log(partnerData.getPartner)
-        setPartner(partnerData.getPartner)
+      if (data) {
+        setPartner(data.addPartner)
         router.replace('/success')
       }
     }
-  }
+  }, [data])
 
   const handleOtherEventsInput = (
     e: ChangeEvent<HTMLTextAreaElement>,

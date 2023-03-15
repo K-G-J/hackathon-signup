@@ -1,5 +1,5 @@
 import { ADDHACKER } from '@/lib/mutations'
-import { useLazyQuery, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import React, { ChangeEvent, ReactElement, useEffect, useState } from 'react'
 import {
   validateEmail,
@@ -7,9 +7,7 @@ import {
   validateLength,
   validateLinkedIn,
 } from '../lib/utils/dataValidation'
-import { IHacker } from '@/context/context'
 import { useRouter } from 'next/navigation'
-import { GETHACKER } from '@/lib/queries'
 import { useGlobalContext } from '@/context'
 
 export interface IHackerInput {
@@ -71,25 +69,17 @@ export default function hackerForm(): ReactElement {
   const [priorBuildsCount, setPriorBuildsCount] = useState<number>(0)
   const [lookingToBuildCount, setLookingToBuildCount] = useState<number>(0)
   const [addHacker, { data, error: addHackerError }] = useMutation(ADDHACKER)
-  const [fetchHacker, { data: hackerData, loading }] = useLazyQuery<IHacker>(
-    GETHACKER,
-  )
   const { setHacker } = useGlobalContext()
   const router = useRouter()
 
   useEffect(() => {
-    checkSuccess()
-  }, [data, loading])
-
-  const checkSuccess = () => {
     if (!addHackerError) {
-      fetchHacker({ variables: { email: form.email } })
-      if (hackerData?.getHacker != null) {
-        setHacker(hackerData.getHacker)
+      if (data) {
+        setHacker(data.addHacker)
         router.replace('/success')
       }
     }
-  }
+  }, [data])
 
   const handleETHExperienceSelect = (
     e: ChangeEvent<HTMLSelectElement>,

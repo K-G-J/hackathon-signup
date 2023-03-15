@@ -1,14 +1,12 @@
 import { UPDATEPARTNER } from '@/lib/mutations'
-import { useLazyQuery, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import React, { ChangeEvent, ReactElement, useEffect, useState } from 'react'
 import {
   validateEmail,
   validateLength,
   validateLinkedIn,
 } from '../lib/utils/dataValidation'
-import { IPartner } from '@/context/context'
 import { useRouter } from 'next/navigation'
-import { GETPARTNER } from '@/lib/queries'
 import { useGlobalContext } from '@/context'
 import { IPartnerFormError, IPartnerInput } from './partner-form'
 import { styleApplicationStatus } from '@/lib/utils/helpers'
@@ -41,24 +39,16 @@ export default function partnerForm(): ReactElement {
   const [updatePartner, { data, error: updatePartnerError }] = useMutation(
     UPDATEPARTNER,
   )
-  const [fetchPartner, { data: partnerData, loading }] = useLazyQuery<IPartner>(
-    GETPARTNER,
-  )
   const router = useRouter()
 
   useEffect(() => {
-    checkSuccess()
-  }, [data, loading])
-
-  const checkSuccess = () => {
     if (!updatePartnerError) {
-      fetchPartner({ variables: { email: form.email } })
-      if (partnerData?.getPartner != null) {
-        setPartner(partnerData.getPartner)
+      if (data) {
+        setPartner(data.updatePartner)
         router.replace('/success')
       }
     }
-  }
+  }, [data])
 
   const handleOtherEventsInput = (
     e: ChangeEvent<HTMLTextAreaElement>,

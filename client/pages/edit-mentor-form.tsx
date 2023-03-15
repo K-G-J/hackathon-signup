@@ -1,5 +1,5 @@
 import { UPDATEMENTOR } from '@/lib/mutations'
-import { useLazyQuery, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import React, { ChangeEvent, ReactElement, useEffect, useState } from 'react'
 import {
   validateEmail,
@@ -7,9 +7,7 @@ import {
   validateLength,
   validateLinkedIn,
 } from '../lib/utils/dataValidation'
-import { IMentor } from '@/context/context'
 import { useRouter } from 'next/navigation'
-import { GETMENTOR } from '@/lib/queries'
 import { useGlobalContext } from '@/context'
 import { IMentorFormError, IMentorInput } from './mentor-form'
 import { styleApplicationStatus } from '@/lib/utils/helpers'
@@ -44,24 +42,16 @@ export default function hackerForm(): ReactElement {
   const [updateMentor, { data, error: updateMentorError }] = useMutation(
     UPDATEMENTOR,
   )
-  const [fetchMentor, { data: mentorData, loading }] = useLazyQuery<IMentor>(
-    GETMENTOR,
-  )
   const router = useRouter()
 
   useEffect(() => {
-    checkSuccess()
-  }, [data, loading])
-
-  const checkSuccess = () => {
     if (!updateMentorError) {
-      fetchMentor({ variables: { email: form.email } })
-      if (mentorData?.getMentor != null) {
-        setMentor(mentorData.getMentor)
+      if (data) {
+        setMentor(data.updateMentor)
         router.replace('/success')
       }
     }
-  }
+  }, [data])
 
   const handleETHExperienceSelect = (
     e: ChangeEvent<HTMLSelectElement>,
