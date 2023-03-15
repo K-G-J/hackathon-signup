@@ -3,8 +3,8 @@ import React from 'react'
 
 function Footer(): JSX.Element {
   return (
-    <div className="absolute inset-x-0 bottom-0">
-      <footer className="w-screen p-4 bg-white rounded-lg shadow md:items-center md:justify-between dark:bg-gray-800 w-100">
+    <div className="inset-x-0 bottom-0">
+      <footer className="bottom-0 w-screen p-4 bg-white rounded-lg shadow md:items-center md:justify-between dark:bg-gray-800 w-100">
         <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
           © 2023{' '}
           <Link
@@ -14,7 +14,7 @@ function Footer(): JSX.Element {
           >
             ETHGlobal
           </Link>
-          .  All Rights Reserved.
+          . All Rights Reserved.
         </span>
         <ul className="flex flex-wrap items-center mt-3 sm:mt-0">
           <li>
@@ -36,13 +36,13 @@ function Footer(): JSX.Element {
             </Link>
           </li>
           <li>
-            <a
+            <Link
               href="https://ethglobal.com/privacy"
               className="mr-4 text-sm text-gray-500 hover:underline md:mr-6 dark:text-gray-400"
               target="_blank"
             >
               Privacy Policy
-            </a>
+            </Link>
           </li>
         </ul>
       </footer>
