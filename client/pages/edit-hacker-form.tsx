@@ -7,13 +7,13 @@ import {
   validateLength,
   validateLinkedIn,
 } from '../lib/utils/dataValidation'
+import { styleApplicationStatus } from '@/lib/utils/helpers'
 import { IHacker } from '@/context/context'
 import { IHackerFormError, IHackerInput } from './hacker-form'
 import { useGlobalContext } from '../context/index'
 import { GETHACKER } from '@/lib/queries'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
-import { styleApplicationStatus } from '@/lib/utils/helpers'
 
 export default function editHackerForm(): ReactElement {
   const { hacker, setHacker } = useGlobalContext()

@@ -89,3 +89,51 @@ export const UPDATEPARTNER = gql`
     }
   }
 `;
+
+export const ADDMENTOR = gql`
+  mutation AddMentor($input: MentorInput!) {
+    addMentor(input: $input) {
+      id
+      createdAt
+      updatedAt
+      email
+      firstName
+      lastName
+      website
+      github
+      linkedIn
+      telegram
+      twitter
+      yearsOfSoftwareExperience
+      ethExperienceLevel
+      priorMentor
+      motivation
+      rulesAccepted
+      applicationStatus
+    }
+  }
+`;
+
+export const UPDATEMENTOR = gql`
+  mutation UpdateMentor($email: String!, $input: MentorInput!) {
+    updateMentor(email: $email, input: $input) {
+      id
+      createdAt
+      updatedAt
+      email
+      firstName
+      lastName
+      website
+      github
+      linkedIn
+      telegram
+      twitter
+      yearsOfSoftwareExperience
+      ethExperienceLevel
+      priorMentor
+      motivation
+      rulesAccepted
+      applicationStatus
+    }
+  }
+`;

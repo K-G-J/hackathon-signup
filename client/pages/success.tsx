@@ -16,7 +16,7 @@ export default function sucess(): ReactElement {
             <h2 className="mb-5 block text-base font-medium text-l text-[#07074D]">
               Thank you for signing up for the ETHGlobal Hackathon
             </h2>
-            <h3>
+            <h3 className="mb-10">
               Your application status is{' '}
               <span
                 className={styleApplicationStatus(hacker!.applicationStatus)}
@@ -34,7 +34,7 @@ export default function sucess(): ReactElement {
             <h2 className="mb-5 block text-base font-medium text-l text-[#07074D]">
               Thank you for signing up for the ETHGlobal Hackathon
             </h2>
-            <h3>
+            <h3 className="mb-10">
               Your application status is{' '}
               <span
                 className={styleApplicationStatus(partner!.applicationStatus)}
@@ -52,7 +52,7 @@ export default function sucess(): ReactElement {
             <h2 className="mb-5 block text-base font-medium text-l text-[#07074D]">
               Thank you for signing up for the ETHGlobal Hackathon
             </h2>
-            <h3>
+            <h3 className="mb-10">
               Your application status is{' '}
               <span
                 className={styleApplicationStatus(mentor!.applicationStatus)}
