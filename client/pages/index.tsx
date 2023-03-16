@@ -68,7 +68,7 @@ export default function Home(): ReactElement {
 
   return (
     <>
-      <main>
+      <div>
         <div className="mx-auto mt-10 w-full max-w-[550px]">
           <h1 className="mb-3 block text-base font-medium text-xl text-[#07074D]">
             Enter your email to join the hackathon
@@ -96,7 +96,7 @@ export default function Home(): ReactElement {
             </div>
           </form>
         </div>
-      </main>
+      </div>
     </>
   )
 }
