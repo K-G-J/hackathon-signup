@@ -9,6 +9,26 @@ import {
 import { useRouter } from 'next/navigation'
 import { useGlobalContext } from '@/context'
 
+export interface IAddPartner {
+  addPartner: {
+    id: string
+    createdAt: string
+    updatedAt?: string
+    email: string
+    firstName: string
+    lastName: string
+    website?: string
+    organization: string
+    linkedIn?: string
+    telegram?: string
+    twitter?: string
+    otherEvents?: string
+    motivation: string
+    rulesAccepted: boolean
+    applicationStatus: string
+  }
+}
+
 export interface IPartnerInput {
   firstName: string
   lastName: string
@@ -57,7 +77,9 @@ export default function partnerForm(): ReactElement {
   })
   const [otherEventsCount, setOtherEventsCount] = useState<number>(0)
   const [motivationCount, setMotivationCount] = useState<number>(0)
-  const [addPartner, { data, error: addPartnerError }] = useMutation(ADDPARTNER)
+  const [addPartner, { data, error: addPartnerError }] = useMutation<
+    IAddPartner
+  >(ADDPARTNER)
   const { setPartner } = useGlobalContext()
   const router = useRouter()
 

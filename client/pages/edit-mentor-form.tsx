@@ -12,6 +12,28 @@ import { useGlobalContext } from '@/context'
 import { IMentorFormError, IMentorInput } from './mentor-form'
 import { styleApplicationStatus } from '@/lib/utils/helpers'
 
+export interface IUpdateMentor {
+  updateMentor: {
+    id: string
+    createdAt: string
+    updatedAt?: string
+    email: string
+    firstName: string
+    lastName: string
+    website?: string
+    github?: string
+    linkedIn?: string
+    telegram?: string
+    twitter?: string
+    yearsOfSoftwareExperience: number
+    ethExperienceLevel: 'BEGINNER' | 'INTERMEDIATE' | 'EXPERT'
+    priorMentor: string
+    motivation?: string
+    rulesAccepted: boolean
+    applicationStatus: string
+  }
+}
+
 export default function hackerForm(): ReactElement {
   const { mentor, setMentor } = useGlobalContext()
   const [form, setForm] = useState<IMentorInput>({
@@ -26,7 +48,7 @@ export default function hackerForm(): ReactElement {
     yearsOfSoftwareExperience: mentor!.yearsOfSoftwareExperience,
     ethExperienceLevel: mentor!.ethExperienceLevel,
     priorMentor: mentor!.priorMentor,
-    motivation: mentor!.motivation,
+    motivation: mentor!.motivation || '',
     rulesAccepted: false,
   })
   const [error, setError] = useState<IMentorFormError>({
@@ -37,11 +59,11 @@ export default function hackerForm(): ReactElement {
     mentor!.priorMentor.length,
   )
   const [motivationCount, setMotivationCount] = useState<number>(
-    mentor!.motivation.length,
+    mentor!.motivation!.length || 0,
   )
-  const [updateMentor, { data, error: updateMentorError }] = useMutation(
-    UPDATEMENTOR,
-  )
+  const [updateMentor, { data, error: updateMentorError }] = useMutation<
+    IUpdateMentor
+  >(UPDATEMENTOR)
   const router = useRouter()
 
   useEffect(() => {

@@ -1,16 +1,16 @@
 import { ReactElement, createContext, useState } from 'react'
 
-export interface IHacker {
+export interface IGetHacker {
   getHacker: {
     id: string
     createdAt: string
-    updatedAt: string
+    updatedAt?: string
     email: string
     firstName: string
     lastName: string
-    website: string
-    github: string
-    linkedIn: string
+    website?: string
+    github?: string
+    linkedIn?: string
     yearsOfSoftwareExperience: number
     ethExperienceLevel: 'BEGINNER' | 'INTERMEDIATE' | 'EXPERT'
     motivation:
@@ -22,62 +22,62 @@ export interface IHacker {
       | 'LAUNCHPRODUCT'
       | 'WINPRIZE'
       | 'OTHER'
-    priorBuilds: string
-    lookingToBuild: string
+    priorBuilds?: string
+    lookingToBuild?: string
     rulesAccepted: boolean
     applicationStatus: string
   }
 }
 
-export interface IPartner {
+export interface IGetPartner {
   getPartner: {
     id: string
     createdAt: string
-    updatedAt: string
+    updatedAt?: string
     email: string
     firstName: string
     lastName: string
-    website: string
+    website?: string
     organization: string
-    linkedIn: string
-    telegram: string
-    twitter: string
-    otherEvents: string
+    linkedIn?: string
+    telegram?: string
+    twitter?: string
+    otherEvents?: string
     motivation: string
     rulesAccepted: boolean
     applicationStatus: string
   }
 }
 
-export interface IMentor {
+export interface IGetMentor {
   getMentor: {
     id: string
     createdAt: string
-    updatedAt: string
+    updatedAt?: string
     email: string
     firstName: string
     lastName: string
-    website: string
-    github: string
-    linkedIn: string
-    telegram: string
-    twitter: string
+    website?: string
+    github?: string
+    linkedIn?: string
+    telegram?: string
+    twitter?: string
     yearsOfSoftwareExperience: number
     ethExperienceLevel: 'BEGINNER' | 'INTERMEDIATE' | 'EXPERT'
     priorMentor: string
-    motivation: string
+    motivation?: string
     rulesAccepted: boolean
     applicationStatus: string
   }
 }
 
 interface IGlobalContextProps {
-  hacker: IHacker['getHacker'] | null
-  partner: IPartner['getPartner'] | null
-  mentor: IMentor['getMentor'] | null
-  setHacker: (hacker: IHacker['getHacker']) => void
-  setPartner: (partner: IPartner['getPartner']) => void
-  setMentor: (mentor: IMentor['getMentor']) => void
+  hacker: IGetHacker['getHacker'] | null
+  partner: IGetPartner['getPartner'] | null
+  mentor: IGetMentor['getMentor'] | null
+  setHacker: (hacker: IGetHacker['getHacker']) => void
+  setPartner: (partner: IGetPartner['getPartner']) => void
+  setMentor: (mentor: IGetMentor['getMentor']) => void
 }
 
 export const GlobalContext = createContext<IGlobalContextProps>({
@@ -94,9 +94,9 @@ export const GlobalContextProvider = ({
 }: {
   children: ReactElement
 }) => {
-  const [hacker, setHacker] = useState<IHacker['getHacker'] | null>(null)
-  const [partner, setPartner] = useState<IPartner['getPartner'] | null>(null)
-  const [mentor, setMentor] = useState<IMentor['getMentor'] | null>(null)
+  const [hacker, setHacker] = useState<IGetHacker['getHacker'] | null>(null)
+  const [partner, setPartner] = useState<IGetPartner['getPartner'] | null>(null)
+  const [mentor, setMentor] = useState<IGetMentor['getMentor'] | null>(null)
 
   return (
     <GlobalContext.Provider

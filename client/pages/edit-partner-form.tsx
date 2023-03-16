@@ -11,6 +11,26 @@ import { useGlobalContext } from '@/context'
 import { IPartnerFormError, IPartnerInput } from './partner-form'
 import { styleApplicationStatus } from '@/lib/utils/helpers'
 
+export interface IUpdatePartner {
+  updatePartner: {
+    id: string
+    createdAt: string
+    updatedAt?: string
+    email: string
+    firstName: string
+    lastName: string
+    website?: string
+    organization: string
+    linkedIn?: string
+    telegram?: string
+    twitter?: string
+    otherEvents?: string
+    motivation: string
+    rulesAccepted: boolean
+    applicationStatus: string
+  }
+}
+
 export default function partnerForm(): ReactElement {
   const { partner, setPartner } = useGlobalContext()
   const [form, setForm] = useState<IPartnerInput>({
@@ -31,14 +51,14 @@ export default function partnerForm(): ReactElement {
     message: '',
   })
   const [otherEventsCount, setOtherEventsCount] = useState<number>(
-    partner!.otherEvents.length,
+    partner!.otherEvents!.length || 0,
   )
   const [motivationCount, setMotivationCount] = useState<number>(
     partner!.motivation.length,
   )
-  const [updatePartner, { data, error: updatePartnerError }] = useMutation(
-    UPDATEPARTNER,
-  )
+  const [updatePartner, { data, error: updatePartnerError }] = useMutation<
+    IUpdatePartner
+  >(UPDATEPARTNER)
   const router = useRouter()
 
   useEffect(() => {

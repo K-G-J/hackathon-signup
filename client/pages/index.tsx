@@ -2,7 +2,7 @@ import { useGlobalContext } from '@/context'
 import { ReactElement, useState, useEffect, FormEvent, MouseEvent } from 'react'
 import { useLazyQuery } from '@apollo/client'
 import { GETHACKER, GETPARTNER, GETMENTOR } from '../lib/queries'
-import { IHacker, IPartner, IMentor } from '@/context/context'
+import { IGetHacker, IGetPartner, IGetMentor } from '@/context/context'
 import { useRouter } from 'next/navigation'
 import { validateEmail } from '@/lib/utils/dataValidation'
 
@@ -12,15 +12,15 @@ export default function Home(): ReactElement {
   const [
     fetchHacker,
     { loading: hackerLoading, error: hackerError, data: hackerData },
-  ] = useLazyQuery<IHacker>(GETHACKER)
+  ] = useLazyQuery<IGetHacker>(GETHACKER)
   const [
     fetchPartner,
     { loading: partnerLoading, error: partnerError, data: partnerData },
-  ] = useLazyQuery<IPartner>(GETPARTNER)
+  ] = useLazyQuery<IGetPartner>(GETPARTNER)
   const [
     fetchMentor,
     { loading: mentorLoading, error: mentorError, data: mentorData },
-  ] = useLazyQuery<IMentor>(GETMENTOR)
+  ] = useLazyQuery<IGetMentor>(GETMENTOR)
   const { setHacker, setPartner, setMentor } = useGlobalContext()
   const router = useRouter()
 

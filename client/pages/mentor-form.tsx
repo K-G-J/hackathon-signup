@@ -10,6 +10,28 @@ import {
 import { useRouter } from 'next/navigation'
 import { useGlobalContext } from '@/context'
 
+export interface IAddMentor {
+  addMentor: {
+    id: string
+    createdAt: string
+    updatedAt?: string
+    email: string
+    firstName: string
+    lastName: string
+    website?: string
+    github?: string
+    linkedIn?: string
+    telegram?: string
+    twitter?: string
+    yearsOfSoftwareExperience: number
+    ethExperienceLevel: 'BEGINNER' | 'INTERMEDIATE' | 'EXPERT'
+    priorMentor: string
+    motivation?: string
+    rulesAccepted: boolean
+    applicationStatus: string
+  }
+}
+
 export interface IMentorInput {
   firstName: string
   lastName: string
@@ -62,7 +84,9 @@ export default function hackerForm(): ReactElement {
   })
   const [priorMentorCount, setPriorMentorCount] = useState<number>(0)
   const [motivationCount, setMotivationCount] = useState<number>(0)
-  const [addMentor, { data, error: addMentorError }] = useMutation(ADDMENTOR)
+  const [addMentor, { data, error: addMentorError }] = useMutation<IAddMentor>(
+    ADDMENTOR,
+  )
   const { setMentor } = useGlobalContext()
   const router = useRouter()
 

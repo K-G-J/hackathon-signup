@@ -35,7 +35,7 @@ export const typeDefs = gql`
     motivation: hackerMotivation!
     priorBuilds: String
     lookingToBuild: String
-    rulesAccepted: Boolean
+    rulesAccepted: Boolean!
     applicationStatus: applicationStatus!
   }
   type Partner {
@@ -52,7 +52,7 @@ export const typeDefs = gql`
     twitter: String
     otherEvents: String
     motivation: String!
-    rulesAccepted: Boolean
+    rulesAccepted: Boolean!
     applicationStatus: applicationStatus!
   }
   type Mentor {
@@ -71,7 +71,7 @@ export const typeDefs = gql`
     ethExperienceLevel: ETHExperience!
     priorMentor: String!
     motivation: String
-    rulesAccepted: Boolean
+    rulesAccepted: Boolean!
     applicationStatus: applicationStatus!
   }
   # ENUMS

@@ -13,6 +13,35 @@ import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { styleApplicationStatus } from '@/lib/utils/helpers'
 
+export interface IUpdateHacker {
+  updateHacker: {
+    id: string
+    createdAt: string
+    updatedAt?: string
+    email: string
+    firstName: string
+    lastName: string
+    website?: string
+    github?: string
+    linkedIn?: string
+    yearsOfSoftwareExperience: number
+    ethExperienceLevel: 'BEGINNER' | 'INTERMEDIATE' | 'EXPERT'
+    motivation:
+      | 'ATTENDWORKSHOPS'
+      | 'RESUMEBUILD'
+      | 'GETBETTER'
+      | 'MEETCOMPANIES'
+      | 'MEETPEOPLE'
+      | 'LAUNCHPRODUCT'
+      | 'WINPRIZE'
+      | 'OTHER'
+    priorBuilds?: string
+    lookingToBuild?: string
+    rulesAccepted: boolean
+    applicationStatus: string
+  }
+}
+
 export default function editHackerForm(): ReactElement {
   const { hacker, setHacker } = useGlobalContext()
   const [form, setForm] = useState<IHackerInput>({
@@ -34,14 +63,14 @@ export default function editHackerForm(): ReactElement {
     message: '',
   })
   const [priorBuildsCount, setPriorBuildsCount] = useState<number>(
-    hacker!.priorBuilds.length,
+    hacker!.priorBuilds!.length || 0,
   )
   const [lookingToBuildCount, setLookingToBuildCount] = useState<number>(
-    hacker!.lookingToBuild.length,
+    hacker!.lookingToBuild!.length || 0,
   )
-  const [updateHacker, { data, error: updateHackerError }] = useMutation(
-    UPDATEHACKER,
-  )
+  const [updateHacker, { data, error: updateHackerError }] = useMutation<
+    IUpdateHacker
+  >(UPDATEHACKER)
   const router = useRouter()
 
   useEffect(() => {

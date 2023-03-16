@@ -1,9 +1,23 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import React from 'react'
-import Link from 'next/link'
+import { useGlobalContext } from '../context/index'
+import { useRouter } from 'next/navigation'
 
 function Header(): JSX.Element {
+  const { setHacker, setPartner, setMentor } = useGlobalContext()
+  const router = useRouter()
+
+  const handleReset = (): void => {
+    // @ts-ignore
+    setHacker(null)
+    // @ts-ignore
+    setPartner(null)
+    // @ts-ignore
+    setMentor(null)
+    router.replace('/')
+  }
+
   return (
     <div>
       <Head>
@@ -14,9 +28,14 @@ function Header(): JSX.Element {
       </Head>
       <header className="header sticky flex top-0 bg-white shadow-md flex items-center justify-between px-8 py-02">
         <h1 className="w-3/12">
-          <Link href="/">
-            <Image src="/ethglobal-banner.png" alt="ETHGlobal logo" width={200} height={200}/>
-          </Link>
+          <a onClick={handleReset}>
+            <Image
+              src="/ethglobal-banner.png"
+              alt="ETHGlobal logo"
+              width={200}
+              height={200}
+            />
+          </a>
         </h1>
       </header>
     </div>

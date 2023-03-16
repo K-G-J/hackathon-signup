@@ -10,6 +10,35 @@ import {
 import { useRouter } from 'next/navigation'
 import { useGlobalContext } from '@/context'
 
+export interface IAddHacker {
+  addHacker: {
+    id: string
+    createdAt: string
+    updatedAt?: string
+    email: string
+    firstName: string
+    lastName: string
+    website?: string
+    github?: string
+    linkedIn?: string
+    yearsOfSoftwareExperience: number
+    ethExperienceLevel: 'BEGINNER' | 'INTERMEDIATE' | 'EXPERT'
+    motivation:
+      | 'ATTENDWORKSHOPS'
+      | 'RESUMEBUILD'
+      | 'GETBETTER'
+      | 'MEETCOMPANIES'
+      | 'MEETPEOPLE'
+      | 'LAUNCHPRODUCT'
+      | 'WINPRIZE'
+      | 'OTHER'
+    priorBuilds?: string
+    lookingToBuild?: string
+    rulesAccepted: boolean
+    applicationStatus: string
+  }
+}
+
 export interface IHackerInput {
   firstName: string
   lastName: string
@@ -68,7 +97,9 @@ export default function hackerForm(): ReactElement {
   })
   const [priorBuildsCount, setPriorBuildsCount] = useState<number>(0)
   const [lookingToBuildCount, setLookingToBuildCount] = useState<number>(0)
-  const [addHacker, { data, error: addHackerError }] = useMutation(ADDHACKER)
+  const [addHacker, { data, error: addHackerError }] = useMutation<IAddHacker>(
+    ADDHACKER,
+  )
   const { setHacker } = useGlobalContext()
   const router = useRouter()
 
