@@ -11,7 +11,7 @@ Frontend technologies: Next, Apollo Client, Tailwind CSS
 
 Implement a basic applying experience for the three roles, where a user, **after signing up**, can apply as a hacker, partner, or mentor.
 
-The application questions for each of the roles are listed at the end of Instructions.md
+The application questions for each of the roles are listed at the end of [Instructions.md](https://github.com/ethglobal/code-challenge-kate/blob/main/Instructions.md)
 
 ## Installation
 
@@ -20,14 +20,16 @@ NOTE: This project requires you to have a local PostgreSQL server on your machin
 1. Clone this repository and open terminal
 2. In root directory, install dependencies with `yarn`
 3. Change directories into "server"
-4. In server directory, remove ".example" extension from .env.example
-5. Replace the variables in capital letters for DATABASE_URL
+4. Install dependencies with `yarn`
+5. In server directory, remove ".example" extension from .env.example
+6. Replace the variables in capital letters for DATABASE_URL
 
    - YOURUSERNAME - your PostgreSQL username
    - YOURPASSWORD - your PostgreSQL password
    - PORT - the port that localhost will run your db on (usually default is 5432)
    - DBNAME - the name of your database (i.e. "hackathon")
 
-6. Create database and schema with command `yarn prisma migrate dev`
-7. Change directories back into the root directory and start up both server and client concurrently with the command `yarn run dev`
-8. Navigate to [localhost on port 3000](http://localhost:3000/)
+7. Create database and schema with command `yarn prisma migrate dev`
+8. Change directories into the client directory and install dependencies with `yarn`
+9. Change directories back into the root directory and start up both server and client concurrently with the command `yarn run dev`
+10. Navigate to [localhost on port 3000](http://localhost:3000/)
